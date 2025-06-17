@@ -26,7 +26,7 @@ export function exportChatToPDF(messages: ChatMessage[], username: string) {
   const lineHeight = 8;
   const maxWidth = 170;
   
-  messages.forEach((message, index) => {
+  messages.forEach((message) => {
     // Check if we need a new page
     if (yPosition > 270) {
       doc.addPage();
@@ -48,7 +48,7 @@ export function exportChatToPDF(messages: ChatMessage[], username: string) {
     const words = message.text.split(' ');
     let line = '';
     
-    for (let word of words) {
+    for (const word of words) {
       const testLine = line + word + ' ';
       const testWidth = doc.getTextWidth(testLine);
       

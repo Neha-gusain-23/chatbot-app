@@ -34,10 +34,12 @@ class AnalyticsTracker {
       try {
         const parsed = JSON.parse(saved);
         // Convert timestamp strings back to Date objects
-        parsed.messageHistory = parsed.messageHistory.map((msg: any) => ({
-          ...msg,
-          timestamp: new Date(msg.timestamp)
-        }));
+        parsed.messageHistory = parsed.messageHistory.map(
+          (msg: ChatAnalytics['messageHistory'][number]) => ({
+            ...msg,
+            timestamp: new Date(msg.timestamp)
+          })
+        );
         return parsed;
       } catch (error) {
         console.error('Error loading analytics:', error);
