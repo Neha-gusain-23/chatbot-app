@@ -3,13 +3,14 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 // In-memory storage for demo purposes (replace with database in production)
-const users: any[] = [];
+const users: Record<string, unknown>[] = [];
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
 export async function POST(request: NextRequest) {
   try {
-    const { username, email, password } = await request.json();
+    const body: Record<string, unknown> = await request.json();
+    const { username, email, password } = body;
 
     // Validation
     if (!username || !email || !password) {
@@ -57,7 +58,7 @@ export async function POST(request: NextRequest) {
     );
 
     // Return user data (without password) and token
-    const { password: _, ...userWithoutPassword } = newUser;
+    const { password, ...userWithoutPassword } = newUser;
     
     return NextResponse.json({
       message: 'User registered successfully',

@@ -88,13 +88,13 @@ export default function Home() {
         recognitionRef.current.interimResults = false;
         recognitionRef.current.lang = 'en-US';
 
-        recognitionRef.current.onresult = (event: any) => {
+        recognitionRef.current.onresult = (event: SpeechRecognitionEvent) => {
           const transcript = event.results[0][0].transcript;
           setChatInput(transcript);
           setIsListening(false);
         };
 
-        recognitionRef.current.onerror = (event: any) => {
+        recognitionRef.current.onerror = (event: SpeechRecognitionErrorEvent) => {
           console.error('Speech recognition error:', event.error);
           setVoiceError(`Voice recognition error: ${event.error}`);
           setIsListening(false);
@@ -127,8 +127,7 @@ export default function Home() {
         // Token is invalid, remove it
         localStorage.removeItem('authToken');
       }
-    } catch (error) {
-      console.error('Error fetching profile:', error);
+    } catch {
       localStorage.removeItem('authToken');
     }
   };
