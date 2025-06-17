@@ -1,35 +1,50 @@
 zerocode-chatbot/
-│
-├── src/
-│ ├── app/
-│ │ ├── api/ # Next.js API routes (auth, user)
-│ │ ├── analytics/ # Analytics dashboard page
-│ │ ├── components/ # All React UI components
-│ │ │ ├── ui/ # Reusable UI elements (Button, Input)
-│ │ │ ├── PromptTemplates.tsx
-│ │ │ ├── ThemeToggle.tsx
-│ │ │ └── VoiceInput.tsx
-│ │ ├── contexts/ # React Contexts (ThemeContext)
-│ │ ├── lib/ # Business logic (auth, analytics)
-│ │ ├── utils/ # Utility functions (e.g., pdfExport)
-│ │ ├── globals.css # Tailwind & custom global styles
-│ │ ├── layout.tsx # App layout (ThemeProvider, fonts)
-│ │ └── page.tsx # Main chat page
-│ ├── public/ # Static assets (SVGs, favicon)
-│ └── types/ # TypeScript global types
-│
-├── package.json
-├── tailwind.config.js
-├── tsconfig.json
-├── README.md
-└── ...
+src/app/api/ – Contains all API routes like authentication and user endpoints (used by Next.js backend functions).
+
+src/app/analytics/ – The dashboard section of the app showing analytics or chat stats.
+
+src/app/components/ – All UI components used throughout the app.
+
+ui/ – Reusable, styled UI elements like buttons, inputs, toggles, etc.
+
+PromptTemplates.tsx – Pre-filled prompts to assist users while chatting.
+
+ThemeToggle.tsx – Component to switch between light and dark themes.
+
+VoiceInput.tsx – Enables voice-to-text functionality inside the chatbot.
+
+src/app/contexts/ – Contains React Context providers, like ThemeContext.
+
+src/app/lib/ – Core logic related to auth, analytics, or custom server-side functions.
+
+src/app/utils/ – Utility functions like exporting chat as PDF or transforming data.
+
+src/app/globals.css – Tailwind CSS styles and any global styles for the app.
+
+src/app/layout.tsx – Global layout file for page structure and providers.
+
+src/app/page.tsx – The main chatbot interface shown to users.
+
+public/ – Static assets such as images, icons, and favicon.
+
+types/ – Centralized folder for global TypeScript types and interfaces.
+
+package.json – Manages project dependencies and scripts.
+
+tailwind.config.js – Tailwind CSS custom configuration.
+
+tsconfig.json – TypeScript configuration for compiler rules and paths.
+
+README.md – Project overview, documentation, and instructions.
+
+
 
 
 ---
 
-##  Key Files & Their Roles
+ Key Files & Their Roles
 
-### `src/app/page.tsx`
+ `src/app/page.tsx`
 - Main chat UI: Handles authentication, chat logic, input history, auto-scroll, and voice input.
 - Integrates analytics: Tracks every message for dashboard.
 
