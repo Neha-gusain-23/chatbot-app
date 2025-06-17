@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
@@ -39,3 +40,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 # chatbot-app
  A chatbot web app with a modern dashboard — built using React, Tailwind CSS, and TypeScript. Features include black theme, auth, and real-time chat.
 >>>>>>> 2b400466956683c71d743ea582055db2faab65f8
+=======
+
+>>>>>>> 6e0d16d4cd01b2c2551cb073707130e75a2e30fd
