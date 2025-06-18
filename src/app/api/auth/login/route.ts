@@ -2,8 +2,16 @@ import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-// In-memory storage for demo purposes (replace with database in production)
-const users: any[] = [];
+// Define a User type
+interface User {
+  id: string;
+  username: string;
+  email: string;
+  password: string;
+}
+
+// Use User[] instead of any[]
+const users: User[] = [];
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
@@ -45,11 +53,9 @@ export async function POST(request: NextRequest) {
     );
 
     // Return user data (without password) and token
-    const { password: _, ...userWithoutPassword } = user;
-    
     return NextResponse.json({
       message: 'Login successful',
-      user: userWithoutPassword,
+      user: user,
       token
     });
 

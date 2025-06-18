@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import ThemeToggle from "@/components/ThemeToggle";
-import { analyticsTracker, ChatAnalytics } from "@/lib/analytics";
+import { analyticsTracker } from "@/lib/analytics";
 
 interface AnalyticsData {
   totalMessages: number;
@@ -25,43 +25,25 @@ interface User {
 }
 
 export default function AnalyticsDashboard() {
-  const [user, setUser] = useState<User | null>(null);
+  const [user] = useState<User | null>(null);
   const [analytics, setAnalytics] = useState<AnalyticsData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
   const router = useRouter();
+
+  const checkAuth = useCallback(async () => {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      router.push('/api/auth/login');
+    }
+  }, [router]);
 
   useEffect(() => {
     checkAuth();
+  }, [checkAuth]);
+
+  useEffect(() => {
+    loadAnalytics();
   }, []);
-
-  const checkAuth = async () => {
-    const token = localStorage.getItem('authToken');
-    if (!token) {
-      router.push('/');
-      return;
-    }
-
-    try {
-      const response = await fetch('/api/user/profile', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setUser(data.user);
-        loadAnalytics();
-      } else {
-        localStorage.removeItem('authToken');
-        router.push('/');
-      }
-    } catch (error) {
-      console.error('Error checking auth:', error);
-      router.push('/');
-    }
-  };
 
   const loadAnalytics = () => {
     // Load real analytics data

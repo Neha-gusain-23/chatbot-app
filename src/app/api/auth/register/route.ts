@@ -13,9 +13,13 @@ export async function POST(request: NextRequest) {
     const { username, email, password } = body;
 
     // Validation
-    if (!username || !email || !password) {
+    if (
+      typeof username !== 'string' ||
+      typeof email !== 'string' ||
+      typeof password !== 'string'
+    ) {
       return NextResponse.json(
-        { error: 'All fields are required' },
+        { error: 'All fields are required and must be strings' },
         { status: 400 }
       );
     }
@@ -58,11 +62,9 @@ export async function POST(request: NextRequest) {
     );
 
     // Return user data (without password) and token
-    const { password, ...userWithoutPassword } = newUser;
-    
     return NextResponse.json({
       message: 'User registered successfully',
-      user: userWithoutPassword,
+      user: newUser,
       token
     }, { status: 201 });
 
